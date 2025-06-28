@@ -79,8 +79,8 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 
 ## 📣 **Contact**
 
-**Author:** [Your Name]  
-**Contact:** [Your Email or LinkedIn]  
+**Author:** [Abanoub Atef Ebead]  
+**Contact:** [https://www.linkedin.com/in/abanoub-atef-a01129251/]  
 **License:** For training/demo purposes only
 
 ---
