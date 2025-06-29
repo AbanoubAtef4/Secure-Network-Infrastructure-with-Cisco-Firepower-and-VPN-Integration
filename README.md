@@ -60,7 +60,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|----------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -81,7 +81,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -92,7 +92,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -103,7 +103,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -114,7 +114,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -125,7 +125,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -136,7 +136,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
@@ -147,7 +147,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|-------------|---------|
+|-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
 | G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
 | S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
