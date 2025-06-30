@@ -61,19 +61,80 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 
 | Interface | IP Address | Mask | Purpose |
 |-----------|--------|------|----------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
+| G0/0 | 172.16.1.49/28 | 255.255.255.240 |  Link to inside ZPF |
+| G0/1 | 172.16.1.33/28 | 255.255.255.240 |  Link to  DMZ|
+| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 ( outside ZPF ) |
+| inside Server | 172.16.1.56 | 255.255.255.240 | Web , Email |
+| Pc7 | 172.16.1.55 | 255.255.255.240 | For inside Users  |
+| DMZ Server | 172.16.1.36 | 255.255.255.240 | Web , mail , FTP  |
+| Pc6 | 172.16.1.35 | 255.255.255.240 | Pc For Management  |
 
 ---
 
-### 🔹 **Router R1**
+### 🔹 **Router R2**
 
 | Interface | IP Address | Mask | Purpose |
 |-----------|--------|------|-------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
+| G0/0 | 172.16.1.157/30 | 255.255.255.252 |  Link to R3 |
+| S0/1/0 | 172.16.1.161/30 | 255.255.255.252 | Link to R4 |
+| S0/1/1 | 172.16.1.169/30 | 255.255.255.252 | Link to R6 |
+| S0/2/0 | 172.16.1.163/30 | 255.255.255.252 | Link to R5 |
+| S0/2/1 | 172.16.1.153/30 | 255.255.255.252 | Link to R1 |
+
+
+---
+
+### 🔹 **Router R3**
+
+| Interface | IP Address | Mask | Purpose |
+|-----------|--------|------|------------|
+| G0/0 | 172.16.1.158/30 | 255.255.255.252 |  Link to R2 |
+| G0/1 | 172.16.1.1/28 | 255.255.255.240 |  Link to inside LAN |
+| SW (Vlan1) | 172.16.1.12 | 255.255.255.240 | Management Vlan |
+| Server | 172.16.1.6 | 255.255.255.240 | Web , mail , Syslog|
+| Pc8 | 172.16.1.5 | 255.255.255.240 | For Users  |
+| Pc0 | 172.16.1.10 | 255.255.255.240 | For Management  |
+
+---
+
+### 🔹 **Router R4**
+
+| Interface | IP Address | Mask | Purpose |
+|-----------|--------|------|------------|
+| G0/0 | 200.1.1.4/25 | 255.255.255.128 |  Link to ASA |
+| S0/1/0 | 172.16.1.173/30 | 255.255.255.252 | Link to R9 |
+| S0/1/1 | 172.16.1.162/30 | 255.255.255.252 | Link to R2 |
+| ASA-G1/1 | 200.1.1.1/25 | 255.255.255.128 | Link to R4 |
+| ASA-G1/2 | 192.168.20.1/24 | 255.255.255.0 | Link to ASA-DMZ |
+| ASA-G1/3 | 192.168.10.1/24 | 255.255.255.0 | Link to ASA Inside |
+| DMZ-Server | 192.168.20.10 | 255.255.255.0 | Web, mail, FTP |
+| Pc5 | 192.168.20.22 | 255.255.255.0 | Management Pc in ASA-DMZ |
+| PC4 | 192.168.10.21 | 255.255.255.0 | User1 in ASA-Inside |
+| PC3 | 192.168.10.20 | 255.255.255.0 | User2 in ASA-Inside |
+
+
+---
+
+### 🔹 **Router R5**
+
+| Interface | IP Address | Mask | Purpose |
+|-----------|--------|------|------------|
+| G0/0.10 | 172.16.1.65/29 | 255.255.255.248 |  Link to inside VLAN 10 |
+| G0/0.20 | 172.16.1.81/29 | 255.255.255.248 |  Link to inside VLAN 20 |
+| G0/0.30 | 172.16.1.89/29 | 255.255.255.248 |  Link to inside VLAN 30 |
+| G0/0.40 | 172.16.1.105/29 | 255.255.255.248 |  Link to inside VLAN 40 |
+| G0/0.50 | 172.16.1.97/29 | 255.255.255.248 |  Link to inside VLAN 50 |
+| S0/1/1 | 172.16.1.166/30 | 255.255.255.252 | Link to R2 |
+| SW (Vlan 40) | 172.16.1.106/29 | 255.255.255.248 | Management VLAN |
+| PC9 | 172.16.1.99 | 255.255.255.248 | PC in Vlan 50 |
+| Server | 172.16.1.91 | 255.255.255.248 | Web, mail, FTP, Syslog, Radius in Vlan 30 |
+| PC10 | 172.16.1.98 | 255.255.255.248 | PC in Voice Vlan 20 |
+| Wireless Router | 172.16.1.66 | 255.255.255.248 | Link to Switch Vlan 10 |
+| Wireless LAN | 192.168.1.1 | 255.255.255.0 | gateway for wireless lan |
+| laptop | 192.168.1.2 | 255.255.255.0 | gateway for wireless lan |
+| tablet | 192.168.1.4 | 255.255.255.0 | gateway for wireless lan |
+
+
 
 
 ---
@@ -83,63 +144,32 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 | Interface | IP Address | Mask | Purpose |
 |-----------|--------|------|------------|
 | G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
+| S0/1/1 | 172.16.1.166/30 | 255.255.255.252 | Link to R2 |
 
 
 ---
 
-### 🔹 **Router R1**
+### 🔹 **Router R6**
 
 | Interface | IP Address | Mask | Purpose |
 |-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
+| S0/1/0 | 172.16.1.170/30 | 255.255.255.252 | Link to R2 |
+| S0/1/1 | 172.16.1.181/30 | 255.255.255.252 | Link to R8 |
+| S0/2/0 | 172.16.1.177/30 | 255.255.255.252 | Link to R7 |
 
 
 ---
 
-### 🔹 **Router R1**
+### 🔹 **Router R7**
 
 | Interface | IP Address | Mask | Purpose |
 |-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
-
-
----
-
-### 🔹 **Router R1**
-
-| Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
-
-
----
-
-### 🔹 **Router R1**
-
-| Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
-
-
----
-
-### 🔹 **Router R1**
-
-| Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
+| G0/0 | 2001:1::1 | /64 |  Link to inside LAN1 |
+| G0/1 | 2001:2::1 | /64 |  Link to inside LAN2 |
+| loopback1 | 2001:3::1 | /64 |  loopback interface |
+| S0/1/0 | 172.16.1.178/30 | 255.255.255.252 | Link to R2 |
+| PC12 | 2001:1::2 | /64 |  PC in LAN1 |
+| PC13 | 2001:2::2 | /64 |  PC in LAN2 |
 
 
 ---
