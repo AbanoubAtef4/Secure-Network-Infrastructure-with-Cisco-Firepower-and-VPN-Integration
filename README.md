@@ -199,7 +199,9 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 - Enable SSH for remote management.
 - Local credentials: `username admin2 password cisco12345`
 - Tacacs+, Radius: 'username abanob password pass1234'
-  
+
+---
+
 ### ✅ R1 — Zone-Based Firewall
 
 - **Zones:** `Private`, `Public`, `DMZ`
