@@ -166,11 +166,16 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 | G0/0.40 | 172.16.1.141/29 | 255.255.255.248 |  Link to inside LAN|
 | G0/1 | 172.16.1.145/29 | 255.255.255.248 |  Link to inside LAN Server|
 | S0/1/0 | 172.16.1.174/30 | 255.255.255.252 | Link to R4 |
-| SW (Vlan 1) | 172.16.1.18 | 255.255.255.240 | Management VLAN |
-| PC11 | 172.16.1.25 | 255.255.255.240 | PC in mode Protect  |
-| PC22 | 172.16.1.98 | 255.255.255.248 | PC in mode Restrict  |
-| PC33 | 172.16.1.98 | 255.255.255.248 | PC in mode Shutdown  |
-
+| SW1 (Vlan 40) | 172.16.1.138 | 255.255.255.248 | Management VLAN |
+| SW2 (Vlan 40) | 172.16.1.139 | 255.255.255.248 | Management VLAN |
+| SW3 (Vlan 40) | 172.16.1.140 | 255.255.255.248 | Management VLAN |
+| PC0 | 172.16.1.115 | 255.255.255.240 | PC in Vlan 10 |
+| PC1 | 172.16.1.122 | 255.255.255.248 | PC in Vlan 20 |
+| PC2 | 172.16.1.131 | 255.255.255.248 | PC in Vlan 30 |
+| PC3 | 172.16.1.130 | 255.255.255.240 | PC in Vlan 10 |
+| PC4 | 172.16.1.123 | 255.255.255.248 | PC in Vlan 20 |
+| PC5 | 172.16.1.114 | 255.255.255.248 | PC in Vlan 30 |
+| PC5 | 172.16.1.114 | 255.255.255.248 | NTP , Syslog , Tacacs+ |
 
 ---
 
