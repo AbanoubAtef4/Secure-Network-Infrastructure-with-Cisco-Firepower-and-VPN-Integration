@@ -19,44 +19,25 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 
 ## 🧩 **Topology Overview**
 
-- **R1**: ZBF, DMZ services (Mail/Web)
-- **R3**: IPS sensor, packet analysis
-- **R4 & R6**: IPSec VPN endpoints
-- **R5**: Wireless LAN, VoIP VLAN, RADIUS/SYSLOG server
-- **R7**: IPv6 Loopback and LANs, IPv6 ACL
-- **R8**: Port security, ACLs, spoofing prevention
-- **R9**: Core services (NTP, SYSLOG, TACACS+), DHCP, VLAN Mgmt
+| Device | Role | Description |
+|--------|------|--------------|
+| **R1** | ZBF | Divides Private, Public, DMZ; class/policy maps |
+| **R2** | Core Router | OSPF backbone |
+| **R3** | IPS | IOS IPS + SPAN |
+| **R4** | VPN Gateway | IPSec Site-to-Site with R6; connects to ASA |
+| **R5** | DHCP, VLANs, RADIUS | VLAN IP pools, RADIUS Auth, Syslog |
+| **R6** | VPN Peer | IPSec Site-to-Site peer |
+| **R7** | IPv6 ACL | IPv6 filter + RBAC parser views |
+| **R8** | ACLs | Anti-spoof, ICMP filter, port security |
+| **R9** | SYSLOG, NTP, TACACS+ | Central admin/auth/log server, VLANs, DHCP Relay |
+| **ASA** | NGFW | DMZ/Inside/Outside zones, NAT, ACLs, DHCP |
+| **Switches** | L2 Security | 802.1X, Port Security, DAI, BPDU Guard |
 
 ---
 
 ## 🔑 **Subnetting Table**
 
-| # | Hosts | Network | Slash | Mask | Usable Range | Broadcast | Router |
-|----|-------|---------|-------|------|---------------|-----------|--------|
-| 1 | 14 | 172.16.1.0 | /28 | 255.255.255.240 | 172.16.1.1–14 | 172.16.1.15 | R3 |
-| 2 | 14 | 172.16.1.16 | /28 | 255.255.255.240 | 172.16.1.17–30 | 172.16.1.31 | R8 |
-| 3 | 14 | 172.16.1.32 | /28 | 255.255.255.240 | 172.16.1.33–46 | 172.16.1.47 | R1-DMZ |
-| 4 | 14 | 172.16.1.48 | /28 | 255.255.255.240 | 172.16.1.49–62 | 172.16.1.63 | R1-ZPF |
-| 5 | 14 | 172.16.1.64 | /28 | 255.255.255.240 | 172.16.1.65–78 | 172.16.1.79 | R5 Wireless |
-| 6 | 6 | 172.16.1.80 | /29 | 255.255.255.248 | 172.16.1.81–86 | 172.16.1.87 | R5 VLAN 10 |
-| 7 | 6 | 172.16.1.88 | /29 | 255.255.255.248 | 172.16.1.89–94 | 172.16.1.95 | R5 VLAN 20 |
-| 8 | 6 | 172.16.1.96 | /29 | 255.255.255.248 | 172.16.1.97–102 | 172.16.1.103 | R5 VLAN 30 |
-| 9 | 6 | 172.16.1.104 | /29 | 255.255.255.248 | 172.16.1.105–110 | 172.16.1.111 | R5 VLAN 40 (Mgmt) |
-| 10 | 6 | 172.16.1.112 | /29 | 255.255.255.248 | 172.16.1.113–118 | 172.16.1.119 | R9 VLAN 50 |
-| 11 | 6 | 172.16.1.120 | /29 | 255.255.255.248 | 172.16.1.121–126 | 172.16.1.127 | R9 VLAN 60 |
-| 12 | 6 | 172.16.1.128 | /29 | 255.255.255.248 | 172.16.1.129–134 | 172.16.1.135 | R9 VLAN 70 |
-| 13 | 6 | 172.16.1.136 | /29 | 255.255.255.248 | 172.16.1.137–142 | 172.16.1.143 | R9 VLAN 80 (Mgmt) |
-| 14 | 6 | 172.16.1.144 | /29 | 255.255.255.248 | 172.16.1.145–150 | 172.16.1.151 | R9 Server |
-| 15 | 2 | 172.16.1.152 | /30 | 255.255.255.252 | 172.16.1.153–154 | 172.16.1.155 | R1–R2 |
-| 16 | 2 | 172.16.1.156 | /30 | 255.255.255.252 | 172.16.1.157–158 | 172.16.1.159 | R2–R3 |
-| 17 | 2 | 172.16.1.160 | /30 | 255.255.255.252 | 172.16.1.161–162 | 172.16.1.163 | R2–R4 |
-| 18 | 2 | 172.16.1.164 | /30 | 255.255.255.252 | 172.16.1.165–166 | 172.16.1.167 | R2–R5 |
-| 19 | 2 | 172.16.1.168 | /30 | 255.255.255.252 | 172.16.1.169–170 | 172.16.1.171 | R2–R6 |
-| 20 | 2 | 172.16.1.172 | /30 | 255.255.255.252 | 172.16.1.173–174 | 172.16.1.175 | R4–R9 |
-| 21 | 2 | 172.16.1.176 | /30 | 255.255.255.252 | 172.16.1.177–178 | 172.16.1.179 | R6–R7 |
-| 22 | 2 | 172.16.1.180 | /30 | 255.255.255.252 | 172.16.1.181–182 | 172.16.1.183 | R6–R8 |
 
----
 ### 🔹 **Router R1**
 
 | Interface | IP Address | Mask | Purpose |
@@ -134,19 +115,6 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 | laptop | 192.168.1.2 | 255.255.255.0 | gateway for wireless lan |
 | tablet | 192.168.1.4 | 255.255.255.0 | gateway for wireless lan |
 
-
-
-
----
-
-### 🔹 **Router R1**
-
-| Interface | IP Address | Mask | Purpose |
-|-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| S0/1/1 | 172.16.1.166/30 | 255.255.255.252 | Link to R2 |
-
-
 ---
 
 ### 🔹 **Router R6**
@@ -174,14 +142,187 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 
 ---
 
-### 🔹 **Router R1**
+### 🔹 **Router R8**
 
 | Interface | IP Address | Mask | Purpose |
 |-----------|--------|------|------------|
-| G0/0 | 172.16.1.154/30 | 255.255.255.252 |  Link to inside |
-| G0/1 | 172.16.1.154/30 | 255.255.255.252 |  Link to outside |
-| S0/1/0 | 172.16.1.154/30 | 255.255.255.252 | Link to R2 |
+| G0/0 | 172.16.1.182/28 | 255.255.255.240 |  Link to inside LAN|
+| S0/1/0 | 172.16.1.17/30 | 255.255.255.252 | Link to R6 |
+| SW (Vlan 1) | 172.16.1.18 | 255.255.255.240 | Management VLAN |
+| PC11 | 172.16.1.25 | 255.255.255.240 | PC in mode Protect  |
+| PC22 | 172.16.1.98 | 255.255.255.248 | PC in mode Restrict  |
+| PC33 | 172.16.1.98 | 255.255.255.248 | PC in mode Shutdown  |
 
+
+---
+
+### 🔹 **Router R9**
+
+| Interface | IP Address | Mask | Purpose |
+|-----------|--------|------|------------|
+| G0/0.10 | 172.16.1.113/29 | 255.255.255.248 |  Link to inside LAN|
+| G0/0.20 | 172.16.1.121/29 | 255.255.255.248 |  Link to inside LAN|
+| G0/0.30 | 172.16.1.129/29 | 255.255.255.248 |  Link to inside LAN|
+| G0/0.40 | 172.16.1.141/29 | 255.255.255.248 |  Link to inside LAN|
+| G0/1 | 172.16.1.145/29 | 255.255.255.248 |  Link to inside LAN Server|
+| S0/1/0 | 172.16.1.174/30 | 255.255.255.252 | Link to R4 |
+| SW (Vlan 1) | 172.16.1.18 | 255.255.255.240 | Management VLAN |
+| PC11 | 172.16.1.25 | 255.255.255.240 | PC in mode Protect  |
+| PC22 | 172.16.1.98 | 255.255.255.248 | PC in mode Restrict  |
+| PC33 | 172.16.1.98 | 255.255.255.248 | PC in mode Shutdown  |
+
+
+---
+
+## 🔐 **Key Configurations**
+
+### ✅ R1 — Zone-Based Firewall
+
+- **Zones:** `Private`, `Public`, `DMZ`
+- **Class-Maps:** Match protocols:
+  - Public → DMZ: HTTP, HTTPS, FTP, SMTP, POP3
+  - Private → DMZ: HTTP, HTTPS, FTP, ICMP
+  - Private → Public: TCP, UDP, ICMP
+- **Policy-Maps:** Inspect matched traffic.
+- **Zone-Pairs:** Apply policies for each zone pair.
+- OSPF with MD5 authentication for secure routing.
+
+---
+
+### ✅ R2 — Core Router
+
+- Basic hostname, privilege password, domain name.
+- OSPF routing for LAN backbone.
+
+---
+
+### ✅ R3 — IPS
+
+- IOS IPS with custom signature category.
+- Enabled inline `deny-packet` for detected threats.
+- Switch SPAN configured:
+  - Source: multiple switch ports.
+  - Destination: IPS listening interface.
+- Syslog logging for IPS alerts.
+
+---
+
+### ✅ R4 & R6 — IPSec VPN
+
+- **IKE Phase 1:**
+  - AES-256, SHA, DH Group 5
+- **IPSec Phase 2:**
+  - AES-256, SHA-HMAC
+- **Access-Lists:**
+  - Defines interesting traffic for site-to-site tunnel.
+- **Crypto Maps:**
+  - Applied to WAN interfaces.
+- Connected to ASA for internet edge protection.
+
+---
+
+### ✅ R5 — VLANs, DHCP, RADIUS
+
+- Multiple DHCP pools for:
+  - Wireless VLAN
+  - Voice VLAN
+  - Data VLANs
+- Interfaces configured with dot1Q trunking.
+- RADIUS server for 802.1X switch authentication.
+- Syslog logs sent to R9.
+
+---
+
+### ✅ R7 — IPv6 ACL & Views
+
+- IPv6 ACL allows ICMP from PC1 to Loopback but blocks PC2.
+- Parser views:
+  - `admin`: full show commands.
+  - `user`: limited to `ping`, `traceroute`.
+
+---
+
+### ✅ R8 — ACL for Anti-Spoofing & Port Security
+
+- Extended ACLs:
+  - Blocks spoofed IPs (RFC1918, reserved, loopback).
+  - Permits trusted ICMP replies & OSPF.
+  - User-specific traffic rules for PCs.
+- AAA with fallback to local auth.
+- Syslog logging for ACL violations.
+
+---
+
+### ✅ R9 — SYSLOG, TACACS+, NTP, VLANs
+
+- DHCP relay for VLANs.
+- TACACS+ for device login.
+- Central Syslog server for all logs.
+- NTP master for time sync with authentication.
+- Switches trust trunk ports for ARP inspection & DHCP Snooping.
+
+---
+
+## 🔒 Cisco ASA
+
+### ✅ Interfaces
+
+| Interface | Nameif | Sec-Level | IP | Purpose |
+|-----------|--------|-----------|-----|---------|
+| G1/1 | OUTSIDE | 0 | 200.1.1.1/25 | Public |
+| G1/2 | DMZ | 50 | 192.168.20.1/24 | DMZ servers |
+| G1/3 | INSIDE | 100 | 192.168.10.1/24 | Internal users |
+
+---
+
+### ✅ NAT
+
+- Static NAT:
+  - DMZ server `192.168.20.10` → `200.1.1.100`
+- Dynamic NAT:
+  - Inside subnet uses interface NAT for outbound.
+
+---
+
+### ✅ ACLs
+
+- Allows:
+  - HTTP, HTTPS, FTP, SMTP, POP3, IMAP, ICMP to DMZ server.
+- Access-group `out-to-dmz` applied to OUTSIDE.
+
+---
+
+### ✅ Service Policies
+
+- Global default inspection for:
+  - DNS, FTP, HTTP, ICMP, TFTP
+
+---
+
+### ✅ DHCP on INSIDE
+
+- Range: `192.168.10.20-192.168.10.250`
+- Default gateway: `192.168.10.1`
+- DNS: `8.8.8.8`
+
+---
+
+### ✅ AAA
+
+- SSH allowed from:
+  - `INSIDE`: `192.168.1.0/24`
+  - `OUTSIDE`: Specific admin IPs.
+- Local user: `abanob`
+
+---
+
+## ⚙️ Switch Security
+
+- **802.1X**: Ports authenticate to RADIUS.
+- **DHCP Snooping & DAI**: Trusted trunks only.
+- **Port Security**: Sticky MACs, violation modes (`restrict`, `shutdown`).
+- **BPDU Guard**: Prevent rogue switches.
+- **SPAN**: For IPS traffic monitoring.
 
 ---
 
@@ -194,12 +335,23 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 - SYSLOG logging for auditing all security events
 
 ---
+---
 
+## 🚀 **Testing**
+
+✔️ VPN Tunnel — verify IPSec SA  
+✔️ IPS — verify blocked attacks  
+✔️ ZBF — check allowed/blocked traffic  
+✔️ IPv6 ACLs — ping tests for PC1 vs PC2  
+✔️ SSH/TACACS+/RADIUS login  
+✔️ NTP — confirm time sync on all devices  
+✔️ Syslog — verify logs centralized
+
+---
 ## ✔️ **Status**
 
 ✅ Fully tested & documented  
 🔗 Ready for deployment  
-🗂️ Version controlled with Git
 
 ---
 
