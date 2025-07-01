@@ -16,7 +16,13 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 - **L2 Security**: DHCP Snooping, Dynamic ARP Inspection, STP hardening
 
 ---
+---
 
+## 🗂️ **Topology**
+
+ <p align='center'> <img src=[https://github.com/AbanoubAtef4/EcryptionandDecryption/blob/main/ScreenShots/Main.PNG](https://github.com/AbanoubAtef4/Secure-Network-Infrastructure-with-Cisco-Firepower-and-VPN-Integration/blob/main/Topology-ScreenShot.png)></p>
+
+---
 ## 🧩 **Topology Overview**
 
 | Device | Role | Description |
