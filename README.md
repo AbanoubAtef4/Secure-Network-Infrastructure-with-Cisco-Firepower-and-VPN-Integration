@@ -346,7 +346,6 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 - SYSLOG logging for auditing all security events
 
 ---
----
 
 ## 🚀 **Testing**
 
@@ -359,12 +358,7 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 ✔️ Syslog — verify logs centralized
 
 ---
-## ✔️ **Status**
 
-✅ Fully tested & documented  
-🔗 Ready for deployment  
-
----
 
 ## 📣 **Contact**
 
