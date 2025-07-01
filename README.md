@@ -187,6 +187,19 @@ Designed and implemented a secure enterprise network using Cisco Firepower NGFW 
 
 ## 🔐 **Key Configurations**
 
+### ✅ **In All Routers:**
+- `enable password` is `cisco12345`
+- Local user: `username admin2 password cisco12345`
+- Tacacs+, Radius: 'username abanob password pass1234'
+- Console password: `cisco12345`
+- Minimum password length: `8`
+- Login block-for policy: brute force mitigation
+
+### ✅ **In All Switches:**
+- Enable SSH for remote management.
+- Local credentials: `username admin2 password cisco12345`
+- Tacacs+, Radius: 'username abanob password pass1234'
+  
 ### ✅ R1 — Zone-Based Firewall
 
 - **Zones:** `Private`, `Public`, `DMZ`
