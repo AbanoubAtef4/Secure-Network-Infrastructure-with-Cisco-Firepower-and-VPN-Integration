@@ -1,4 +1,4 @@
-# 🛡️ Secure Network Infrastructure with Cisco Firepower and VPN Integration
+# 🛡️ Securing Enterprise Network Infrastructure Using Cisco Packet Tracer
 
 Designed and implemented a secure enterprise network using Cisco Firepower NGFW and ASA firewalls. Configured an Intrusion Prevention System (IPS) to detect and block malicious traffic in real time. Deployed secure IPsec VPNs for encrypted remote access. Applied AAA protocols (RADIUS/TACACS+) for robust access control and policy enforcement. Implemented OSPF with authentication to secure routing updates and ensure network segmentation. Integrated Layer 2 security features to prevent VLAN hopping and MAC spoofing attacks.
 
